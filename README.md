@@ -76,18 +76,18 @@ org.killbill.billing.plugin.kafka.topic.usagemetric=stream.usagemetrics
 org.killbill.billing.plugin.kafka.server=localhost:9092
 org.killbill.billing.plugin.kafka.consumerGroup=killbillgroup
 org.killbill.billing.plugin.kafka.sslEnabled=false
+```
+7. If there is SSL handshake required you can make `sslEnbled` to `true`. And after provide the truststore and keystore related config as shown below
+```
+org.killbill.billing.plugin.kafka.topic.usagemetric=stream.usagemetrics
+org.killbill.billing.plugin.kafka.server=localhost:9092
+org.killbill.billing.plugin.kafka.consumerGroup=killbillgroup
+org.killbill.billing.plugin.kafka.sslEnabled=true
 org.killbill.billing.plugin.kafka.trustStoreLocation=/Users/prashant.kumar/Downloads/keystore1.jks
 org.killbill.billing.plugin.kafka.trustStorePassword=cashfree
 org.killbill.billing.plugin.kafka.keyPassword=cashfree
 org.killbill.billing.plugin.kafka.keyStoreLocation=/Users/prashant.kumar/Downloads/keystore1.jks
 org.killbill.billing.plugin.kafka.keyStorePassword=cashfree
-```
-7. If there is no SSL handshake required you can make `sslEnbled` to `false`. And after there is no required to provide other ssl related config.
-```
-org.killbill.billing.plugin.kafka.topic.usagemetric=stream.usagemetrics
-org.killbill.billing.plugin.kafka.server=localhost:9092
-org.killbill.billing.plugin.kafka.consumerGroup=killbillgroup
-org.killbill.billing.plugin.kafka.sslEnabled=false
 ```
 8. Now you are ready to push usage message to the killbill using kafka.
    - Create Tenant and Catalog.
