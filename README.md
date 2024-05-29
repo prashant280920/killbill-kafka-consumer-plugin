@@ -92,8 +92,36 @@ org.killbill.billing.plugin.kafka.keyStorePassword=cashfree
 8. Now you are ready to push usage message to the killbill using kafka.
    - Create Tenant and Catalog.
    - Create Account and Subscribe the plan using Subscription external key.
-   - Now push message by any service or via API that I have added to publish message to the kafka topic and then our kafka consumer will consume the message.
+   - Now push message using a command or via API that I have added to publish message to the kafka topic and then our kafka consumer will consume the message.
    - Provide `subscriptionExternalKey` you used while creating a subscription and `tenantId` that you have created.
+```curl
+echo '{
+  "subscriptionExternalKey": "ROUTER_19_mandate-creation-plan-monthly",
+  "trackingId": "11",
+  "tenantId":"0d96d663-00c1-4ff7-8324-d97cc551d6b3",
+  "unitUsageRecords": [
+    {
+      "unitType": "txnCount",
+      "usageRecords": [
+        {
+          "recordDate": "2024-05-01T02:59:33.147",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "unitType": "txnVolume",
+      "usageRecords": [
+        {
+          "recordDate": "2024-05-01T02:59:33.147",
+          "amount": 250
+        }
+      ]
+    }
+  ]
+}' | bin/kafka-console-producer.sh  --bootstrap-server localhost:9092 --topic stream.usagemetrics
+```
+
 ```curl
 curl --location 'localhost:8080/plugins/kafka-consumer-plugin/?topicName=stream.usagemetrics' \
 --header 'Content-Type: application/json' \
